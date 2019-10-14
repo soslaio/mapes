@@ -106,3 +106,4 @@ venv.bak/
 start.sh
 docker/
 .idea/
+migrations/
