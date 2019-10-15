@@ -5,6 +5,9 @@ from django.db import models
 class Medico(models.Model):
     nome_medico = models.CharField(max_length=200)
 
+    class Meta:
+        ordering = ['nome_medico']
+
     def __str__(self):
         return self.nome_medico
 
@@ -38,3 +41,6 @@ class Exame(models.Model):
     consulta = models.ForeignKey(Consulta, on_delete=models.CASCADE, related_name='exames')
     nome_exame = models.CharField(max_length=200, null=True, blank=True)
     valor_exame = models.DecimalField(decimal_places=2, max_digits=11)
+
+    def __str__(self):
+        return f'{self.consulta} - {self.nome_exame}'
