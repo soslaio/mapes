@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Pesquisa de Consultas</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Pesquisa de Consultas</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome do Médico</th>
+                    <th>Número da Guia</th>
+                    <th>Data da Consulta</th>
+                    <th>Valor da Consulta</th>
+                    <th>Gasto por Consulta</th>
+                    <th>Qtde Exames</th>
+                </tr>
+            </thead>
+            <tbody id="consultas">
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+<script>
+    pesquisarConsultas();
+
+    function pesquisarConsultas() {
+        const url = `http://localhost:8001/graphql/`;
+        const data = {
+            query: "{ consultasMedico(idMedico:4){ medico { nomeMedico } numGuiaConsulta dataConsulta valorConsulta gastoConsulta qtdeExames }}"
+        }
+        var config = {
+            method: 'POST',
+            headers: new Headers({
+                "Content-Type": "application/json"
+            }),
+            body: JSON.stringify(data)
+        };
+
+        fetch(url, config)
+            .then(response => response.json())
+            .then(jsonResponse => {
+                return jsonResponse.data.consultasMedico.reduce((html, consulta) => html += `
+                    <tr>
+                        <td>${consulta.medico.nomeMedico}</td>
+                        <td>${consulta.numGuiaConsulta}</td>
+                        <td>${consulta.dataConsulta}</td>
+                        <td>${consulta.valorConsulta}</td>
+                        <td>${consulta.gastoConsulta}</td>
+                        <td>${consulta.qtdeExames}</td>
+                    </tr>
+                `, '')
+            })
+            .then(html => {
+                document.querySelector('#consultas').innerHTML = html;
+            })
+    }
+</script>
+
+</html>
