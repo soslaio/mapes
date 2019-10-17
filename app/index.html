@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.11/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <title>Pesquisa de Consultas</title>
 </head>
 
@@ -14,6 +16,37 @@
     <div class="container">
 
         <h1>Pesquisa de Consultas</h1>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="medicos">Médico</label>
+                    <select class="form-control" id="medicos">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Período</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <input class="form-control" type="date" id="inicio" />
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" id="fim" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row filtro">
+            <div class="col-6">
+                <button type="button" class="btn btn-primary btn-sm btn-block" id="pesquisar">Pesquisar</button>
+            </div>
+        </div>
 
         <table class="table">
             <thead>
@@ -33,40 +66,8 @@
 
 </body>
 
-<script>
-    pesquisarConsultas();
-
-    function pesquisarConsultas() {
-        const url = `http://localhost:8001/graphql/`;
-        const data = {
-            query: "{ consultasMedico(idMedico:4){ medico { nomeMedico } numGuiaConsulta dataConsulta valorConsulta gastoConsulta qtdeExames }}"
-        }
-        var config = {
-            method: 'POST',
-            headers: new Headers({
-                "Content-Type": "application/json"
-            }),
-            body: JSON.stringify(data)
-        };
-
-        fetch(url, config)
-            .then(response => response.json())
-            .then(jsonResponse => {
-                return jsonResponse.data.consultasMedico.reduce((html, consulta) => html += `
-                    <tr>
-                        <td>${consulta.medico.nomeMedico}</td>
-                        <td>${consulta.numGuiaConsulta}</td>
-                        <td>${consulta.dataConsulta}</td>
-                        <td>${consulta.valorConsulta}</td>
-                        <td>${consulta.gastoConsulta}</td>
-                        <td>${consulta.qtdeExames}</td>
-                    </tr>
-                `, '')
-            })
-            .then(html => {
-                document.querySelector('#consultas').innerHTML = html;
-            })
-    }
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.11/dist/js/select2.min.js"></script>
+<script src="app.js"></script>
 
 </html>

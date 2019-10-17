@@ -36,18 +36,19 @@ class ExameType(DjangoObjectType):
 class Query(object):
 
     todos_medicos = graphene.List(MedicoType)
-    todas_consultas = graphene.List(ConsultaType)
-    consultas_medico = graphene.List(ConsultaType, id_medico=graphene.Int())
-    consultas_periodo = graphene.List(ConsultaType, data_inicio=graphene.Date(), data_fim=graphene.Date())
+    consultas = graphene.List(ConsultaType, id_medico=graphene.String(), data_inicio=graphene.Date(),
+                              data_fim=graphene.Date())
 
     def resolve_todos_medicos(self, info, **kwargs):
         return Medico.objects.all()
 
-    def resolve_todas_consultas(self, info, **kwargs):
-        return sorted(Consulta.objects.all(), key=lambda c: c.gasto_consulta)
+    def resolve_consultas(self, info, id_medico=None, data_inicio=None, data_fim=None):
+        consultas = Consulta.objects.all()
 
-    def resolve_consultas_medico(self, info, id_medico):
-        return Consulta.objects.filter(medico__id=id_medico)
+        if id_medico:
+            consultas = consultas.filter(medico__id=id_medico)
 
-    def resolve_consultas_periodo(self, info, data_inicio, data_fim):
-        return Consulta.objects.filter(data_consulta__range=(data_inicio, data_fim))
+        if data_inicio and data_fim:
+            consultas = consultas.filter(data_consulta__range=(data_inicio, data_fim))
+
+        return sorted(consultas, key=lambda c: c.gasto_consulta)
