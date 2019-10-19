@@ -43,6 +43,7 @@ function renderizarSelect(seletor, dados, mapa) {
 
         // Cria o elemento option e adiciona ao select.
         var objConsulta = new Option(dado[mapa.texto], dado[mapa.valor], false, false);
+
         $(seletor).append(objConsulta);
     });
 }
@@ -61,6 +62,7 @@ function renderizarTabela(seletor, dados) {
             ${Object.keys(dado).reduce((htmlColuna, coluna) => htmlColuna += `<td>${dado[coluna]}</td>`, '')}
         </tr>`;
     }, '');
+
     $(seletor).html(htmlBody);
 }
 

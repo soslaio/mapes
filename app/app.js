@@ -36,10 +36,15 @@ function filtrarConsultas() {
 
     // Armazena a informação do médico selecionado.
     const codmedico = $('#medicos').val();
+    const inicio = $('#inicio').val();
+    const fim = $('#fim').val();
 
     // Consulta padrão GraphQL filtrando pelo código do médico selecionado.
     const query = `{
-        consultas(idMedico: "${codmedico}") {
+        consultas(
+            idMedico: "${codmedico}",
+            dataInicio: "${inicio}",
+            dataFim: "${fim}" ) {
             medico {
                 nomeMedico
             }

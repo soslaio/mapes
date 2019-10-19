@@ -48,8 +48,8 @@ class ExameType(DjangoObjectType):
 class Query(object):
 
     todos_medicos = graphene.List(MedicoType)
-    consultas = graphene.List(ConsultaType, id_medico=graphene.String(), data_inicio=graphene.Date(),
-                              data_fim=graphene.Date())
+    consultas = graphene.List(ConsultaType, id_medico=graphene.String(), data_inicio=graphene.String(),
+                              data_fim=graphene.String())
 
     def resolve_todos_medicos(self, info, **kwargs):
         return Medico.objects.all()
