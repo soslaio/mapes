@@ -17,6 +17,9 @@ class ConsultaType(DjangoObjectType):
     gasto_consulta = graphene.Float()
     num_guia_consulta = graphene.String()
     qtde_exames = graphene.Int()
+    data_consulta_formatada = graphene.String()
+    valor_consulta_formatado = graphene.String()
+    gasto_consulta_formatado = graphene.String()
 
     def resolve_gasto_consulta(self, info):
         return self.gasto_consulta
@@ -26,6 +29,15 @@ class ConsultaType(DjangoObjectType):
 
     def resolve_qtde_exames(self, info):
         return self.qtde_exames
+
+    def resolve_data_consulta_formatada(self, info):
+        return self.data_consulta_formatada
+
+    def resolve_valor_consulta_formatado(self, info):
+        return self.valor_consulta_formatado
+
+    def resolve_gasto_consulta_formatado(self, info):
+        return self.gasto_consulta_formatado
 
 
 class ExameType(DjangoObjectType):
@@ -51,4 +63,4 @@ class Query(object):
         if data_inicio and data_fim:
             consultas = consultas.filter(data_consulta__range=(data_inicio, data_fim))
 
-        return sorted(consultas, key=lambda c: c.gasto_consulta)
+        return sorted(consultas, key=lambda c: c.gasto_consulta, reverse=True)

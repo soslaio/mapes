@@ -1,5 +1,10 @@
 
 from django.db import models
+from django.utils.formats import localize
+
+
+def formatar_moeda(valor):
+    return f'R$ {localize(valor)}'
 
 
 class Medico(models.Model):
@@ -18,6 +23,14 @@ class Consulta(models.Model):
     valor_consulta = models.DecimalField(decimal_places=2, max_digits=11)
 
     @property
+    def valor_consulta_formatado(self):
+        return formatar_moeda(self.valor_consulta)
+
+    @property
+    def data_consulta_formatada(self):
+        return self.data_consulta.strftime('%d/%m/%Y')
+
+    @property
     def num_guia_consulta(self):
         return self.id
 
@@ -32,6 +45,10 @@ class Consulta(models.Model):
             for exame in self.exames.all():
                 total += float(exame.valor_exame)
         return total
+
+    @property
+    def gasto_consulta_formatado(self):
+        return formatar_moeda(self.gasto_consulta)
 
     def __str__(self):
         return f'{self.data_consulta} - {self.medico.nome_medico}'
