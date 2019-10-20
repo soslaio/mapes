@@ -112,3 +112,4 @@ dmypy.json
 venv/
 *.sqlite
 *.sqlite3
+*.pyc

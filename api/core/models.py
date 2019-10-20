@@ -1,10 +1,15 @@
 
 from django.db import models
-from django.utils.formats import localize
 
 
 def formatar_moeda(valor):
-    return f'R$ {localize(valor)}'
+    """Esse método foi escolhido devido não possuir importes e não depende de configurações de ambiente,
+       que não passaram em todos os cenários de teste verificados."""
+    a = '{:,.2f}'.format(valor)
+    b = a.replace(',', 'v')
+    c = b.replace('.', ',')
+    d = c.replace('v', '.')
+    return f'R$ {d}'
 
 
 class Medico(models.Model):
