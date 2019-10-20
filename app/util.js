@@ -7,7 +7,7 @@
 async function consultar(query) {
 
     // URL base para todas as consultas ao GraphQL.
-    const url = `http://localhost:8001/graphql/`;
+    const url = `https://mapes.herokuapp.com/graphql/`;
 
     // Configurações da requisição, incluindo método de consulta,
     // cabeçalho HTML e dados JSON da consulta.

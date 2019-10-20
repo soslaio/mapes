@@ -25,7 +25,7 @@ SECRET_KEY = 'qwf-555bvkkip^srcasr=b@owi@4$(s^gdafi8qf0cs_d$y#hd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mapes.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'mapes.herokuapp.com']
 
 
 # Application definition
