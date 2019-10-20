@@ -1,8 +1,15 @@
-
 label {
     font-weight: bold;
 }
 
 .filtro {
     margin-bottom: 1em;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: brown;
 }

@@ -18,54 +18,73 @@
 
         <div class="row">
             <div class="col-6">
-                <div class="form-group">
-                    <label for="medicos">Médico</label>
-                    <select class="form-control" id="medicos">
-                        <option value="">Todos</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label>Período</label>
-                    <div class="row">
-                        <div class="col-6">
-                            <input class="form-control" type="date" id="inicio" />
-                        </div>
-                        <div class="col-6">
-                            <input class="form-control" type="date" id="fim" />
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="medicos">Médico</label>
+                            <select class="form-control" id="medicos">
+                                <option value="">Todos</option>
+                            </select>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Período</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="form-control" type="date" id="inicio" />
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" type="date" id="fim" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row filtro">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary btn-sm btn-block" id="pesquisar">Pesquisar</button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row filtro">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-sm btn-block" id="pesquisar">Pesquisar</button>
+                <svg width="450" height="200"></svg>
             </div>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome do Médico</th>
-                    <th>Número da Guia</th>
-                    <th>Data da Consulta</th>
-                    <th>Valor da Consulta</th>
-                    <th>Gasto por Consulta</th>
-                    <th>Qtde Exames</th>
-                </tr>
-            </thead>
-            <tbody id="consultas">
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome do Médico</th>
+                            <th>Número da Guia</th>
+                            <th>Data da Consulta</th>
+                            <th>Valor da Consulta</th>
+                            <th>Gasto por Consulta</th>
+                            <th>Qtde Exames</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultas">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
     </div>
 
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
 <script src="util.js"></script>
 <script src="app.js"></script>
 
