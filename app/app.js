@@ -13,6 +13,7 @@ $(document).ready(function () {
 
     // Carrega a lista de médicos.
     listarMedicos();
+    filtrarConsultas();
 });
 
 
