@@ -1,0 +1,40 @@
+
+version: '3.1'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: pg_pass
+    ports:
+      - 5432:5432
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    ports:
+      - 81:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@teste.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin_pass
+
+  mapesapi:
+    build: docker
+    image: mapesapi
+    container_name: mapesapi
+    command: gunicorn -b 0.0.0.0:80 --timeout 90 api.wsgi
+    ports:
+      - 8001:80
+    environment:
+      DB_HOST: db
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASS: pg_pass
+      DB_PORT: 5432
+
+  mapescli:
+    image: nginx:1.17
+    container_name: mapescli
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/usr/share/nginx/html
