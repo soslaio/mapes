@@ -14,5 +14,3 @@ WORKDIR /opt/api/
 RUN pip install -r requirements.txt
 
 WORKDIR /opt/api/
-RUN python manage.py migrate
-RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'pass')" | python manage.py shell

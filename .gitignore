@@ -105,6 +105,5 @@ venv.bak/
 
 start.sh
 runtest.sh
-docker/
 .idea/
 migrations/

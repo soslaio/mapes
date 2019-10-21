@@ -9,16 +9,20 @@ services:
       - 5432:5432
 
   pgadmin4:
+    depends_on:
+      - db
     image: dpage/pgadmin4:latest
     container_name: pgadmin4
     ports:
-      - 81:80
+      - 82:80
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin@teste.com
       PGADMIN_DEFAULT_PASSWORD: pgadmin_pass
 
   mapesapi:
-    build: docker
+    depends_on:
+      - db
+    build: .
     image: mapesapi
     container_name: mapesapi
     command: gunicorn -b 0.0.0.0:80 --timeout 90 api.wsgi
@@ -32,9 +36,11 @@ services:
       DB_PORT: 5432
 
   mapescli:
+    depends_on:
+      - mapesapi
     image: nginx:1.17
     container_name: mapescli
     ports:
-      - 80:80
+      - 81:80
     volumes:
       - ./app:/usr/share/nginx/html
