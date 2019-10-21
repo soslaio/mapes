@@ -93,3 +93,14 @@ async function analisarRespostaHTTP(resposta) {
     // Lança uma exceção caso a resposta não esteja OK.
     throw new Error(resposta.statusText);
 }
+
+
+function tratarData(dataISO) {
+    const dataObj = new Date(`${dataISO}T00:00:00`);
+    return dataObj.toLocaleDateString('pt-BR', { year: 'numeric', month: 'numeric' });
+}
+
+
+function dataISOParaLocal(data) {
+    return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
+}

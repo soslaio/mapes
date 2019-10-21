@@ -58,6 +58,7 @@ function filtrarConsultas() {
     }`;
 
     // Executa a consulta de consultas na rota do GraphQL no servidor de API.
+    exibirLoading();
     consultar(query)
         .then(jsonResponse => {
 
@@ -74,11 +75,15 @@ function filtrarConsultas() {
             // Passa os dados ajustados pro método especialista em renderizar tabelas.
             renderizarTabela('#consultas', dadosAjustados);
 
+            ocultarLoading();
+
             // Passa os dados pro próximo then.
             return jsonResponse.data.consultas;
         })
         .then(renderizarGrafico)
+        .catch(erro => ocultarLoading());
 }
+
 
 function tratarDados(dados) {
 
@@ -97,6 +102,7 @@ function tratarDados(dados) {
         }
     })
 }
+
 
 function renderizarGrafico(dados) {
 
@@ -162,11 +168,12 @@ function renderizarGrafico(dados) {
         });
 }
 
-function tratarData(dataISO) {
-    const dataObj = new Date(`${dataISO}T00:00:00`);
-    return dataObj.toLocaleDateString('pt-BR', { year: 'numeric', month: 'numeric' });
+
+function exibirLoading(){
+    $('#loader').addClass('is-active');
 }
 
-function dataISOParaLocal(data) {
-    return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
+
+function ocultarLoading(){
+    $('#loader').removeClass('is-active');
 }
