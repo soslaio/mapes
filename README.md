@@ -1,4 +1,4 @@
-# Mapes - Consulta Médicas
+# Mapes - Consultas Médicas
 *Relatório de produção médica com gráfico.*
 
 Essa solução foi construída utilizando as seguintes tecnologias:
